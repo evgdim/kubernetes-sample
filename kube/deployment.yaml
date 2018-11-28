@@ -7,9 +7,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 9090
+  - port: 8080
   selector:
-    app: kube-sample-selector
+    app: kube-sample
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -21,7 +21,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: kube-sample-selector
+      app: kube-sample
   template:
     metadata:
       labels:
