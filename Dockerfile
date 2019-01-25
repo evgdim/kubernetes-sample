@@ -1,5 +1,9 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM maven:3.5.2-jdk-8 AS build  
+COPY src /usr/src/app/src/
+COPY pom.xml /usr/src/app  
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+FROM openjdk:8
+COPY --from=build /usr/src/app/target/kubernetes-sample-0.0.1-SNAPSHOT.jar /usr/app/kubernetes-sample-0.0.1-SNAPSHOT.jar  
+EXPOSE 8080  
+ENTRYPOINT ["java","-jar","/usr/app/kubernetes-sample-0.0.1-SNAPSHOT.jar"]  
