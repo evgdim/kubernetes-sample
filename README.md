@@ -7,3 +7,16 @@
 `$ docker exec -i -t <container name> /bin/ash`
 
 `$ kubectl create -f .\kube\deployment.yaml`
+
+
+
+
+
+
+`.\oc.exe create -f D:\GitHub\kubernetes-sample\kube\openshift\image-stream.yaml`
+
+`.\oc.exe create -f D:\GitHub\kubernetes-sample\kube\openshift\build.yaml`
+
+`.\oc.exe create -f D:\GitHub\kubernetes-sample\kube\openshift\deployment.yaml`
+
+`.\oc.exe delete -f D:\GitHub\kubernetes-sample\kube\openshift\deployment.yaml`

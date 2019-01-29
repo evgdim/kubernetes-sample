@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: kube-sample
+  name: kube-sample
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: kube-sample:latest
+  resources: {}
+  source:
+    git:
+      uri: https://github.com/evgdim/kubernetes-sample.git
+    type: Git
+  strategy:
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+    type: Docker

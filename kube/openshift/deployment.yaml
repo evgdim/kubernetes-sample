@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-sample
+  labels:
+    app: kube-sample
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: kube-sample
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-sample
+  labels:
+    app: kube-sample
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kube-sample
+  template:
+    metadata:
+      labels:
+        app: kube-sample
+    spec:
+      containers:
+      - name: kube-sample
+        image: 172.30.1.1:5000/myproject/kube-sample:latest
+        ports:
+        - containerPort: 8080
+    # triggers:
+    # - type: ConfigChange
+    # - imageChangeParams:
+    #     automatic: true
+    #     containerNames:
+    #     - kube-sample
+    #     from:
+    #       kind: ImageStreamTag
+    #       name: kube-sample:latest
+    #   type: ImageChange
